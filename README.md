@@ -1,2 +1,1 @@
-# Web Folder Structure
-"# english-dictionary" 
+# English Dictionary
