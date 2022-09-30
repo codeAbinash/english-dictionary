@@ -1,0 +1,40 @@
+@mixin flex($jc : center, $dir : column) {
+    display: flex;
+    justify-content: $jc;
+    align-items: center;
+    flex-direction: $dir;
+}
+
+.searchBar {
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 1em 0.5em 1em 3.1em;
+    border-radius: var(--bdrs);
+    // border-radius: 100vmax;
+    // border: 1.5px solid var(--border-color);
+    border: 1.2px solid transparent;
+    background-color: #f1f1f1;
+    outline: none;
+    background-image: url('../../image/icon/search_gray_48dp.svg');
+    background-repeat: no-repeat;
+    background-position: 1.1em center;
+    background-size: 1.5em;
+    font-weight: 500;
+    caret-color: var(--color);
+    // transition: 300ms border, 300ms background-color;
+    // &:focus {
+    //     border-color: var(--color);
+    //     // background-color: transparent;
+    // }
+    &::-webkit-search-cancel-button{  
+        -webkit-appearance: none;
+        height: 2em;
+        width: 2em;
+        background-size: 1.6em;
+        opacity: 0.9;
+        // outline: 1px solid red;
+        background-image: url('../../image/icon/clear_black_48dp.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}

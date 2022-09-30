@@ -1,0 +1,69 @@
+@use './common';
+@use './common/layout' as ui;
+@use './common/animation' as anim;
+@use './common/colors' as color;
+@use './common/var';
+@use './screen2';
+@use './screen1';
+
+body {
+    min-height: 100vh;
+}
+
+#main {
+    min-height: 100vh;
+    width: 100%;
+    $navbar-height : 65px;
+    .screen-container {
+        .screen{
+            width: 100%;
+            // height: calc(100vh - $navbar-height + 2px);
+            padding-bottom: $navbar-height;
+            display: none;
+            // padding: 20px;
+            &.active{
+                display: block;
+            }
+        }
+    }
+
+    >nav.bottom {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        height: $navbar-height;
+        padding-block: 3px;
+        display: flex;
+        // display: none;
+        justify-content: space-around;
+        align-items: center;
+        border-top: 1px solid #88888820;
+        background-color: var(--bg-blur);
+        backdrop-filter: blur(var(--blur));
+        --webkit-backdrop-filter: blur(var(--blur));
+
+        >.option {
+            height: 100%;
+            // background-color: lime;
+            padding-inline: 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            opacity: 0.35;
+            @include anim.press(150, 95);
+
+            >img {
+                width: 25px;
+            }
+
+            >span {
+                font-size: 0.7rem;
+            }
+
+            &.active {
+                opacity: 0.8;
+            }
+        }
+    }
+}

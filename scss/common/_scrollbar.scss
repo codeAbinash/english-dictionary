@@ -1,0 +1,18 @@
+// Style Scrollbar
+@use './colors' as color;
+
+::-webkit-scrollbar {
+    // width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    // background: color.color();
+}
+
+::-webkit-scrollbar-thumb {
+    // background: color.color('bg');
+}
+
+::-webkit-scrollbar-thumb:hover {
+    // background: color.color('bg', $opacity : 90);
+}

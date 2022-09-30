@@ -1,0 +1,189 @@
+@use './common/animation' as anim;
+
+
+#screen2 {
+    // padding-bottom: 100vh;
+    // $navbar-height : 65px;
+    // padding-bottom: $navbar-height;
+    .search {
+        width: 100%;
+        padding-inline: 20px;
+        padding-top: 20px;
+        // padding-bottom: 20px;
+    }
+    .hidden{
+        display: none;
+    }
+    >#results {
+        // padding: 20px;
+        .result {
+            .word {
+                width: 100%;
+                padding-inline: 20px;
+                padding-top: 30px;
+                display: flex;
+                justify-content: space-between;
+                gap: 1em;
+
+                h2 {
+                    word-break: break-all;
+                }
+
+                >.actions {
+                    // user-select: none;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    // outline: 1px solid var(--color);
+                    gap: 5px;
+
+                    img {
+                        padding: 7px;
+                        aspect-ratio: 1 / 1;
+                        object-fit: contain;
+                        @include anim.press(200, 90);
+                        width: 2.5em;
+                        border-radius: 50%;
+
+                        // transition: background-color 300ms;
+                        &:active {
+                            background-color: #eee;
+                        }
+                    }
+                }
+            }
+
+            .phonetics {
+                padding-inline: 20px;
+                padding-bottom: 20px;
+
+                >p {
+                    font-size: 0.8em;
+                    color: var(--gray);
+                    font-weight: 500;
+                }
+            }
+
+            >.meanings {
+                >.meaning {
+                    width: 100%;
+                    padding-inline: 20px;
+                    padding-block: 15px;
+
+                    >.type {
+                        span {
+                            font-style: italic;
+                            font-weight: 500;
+                            font-family: 'Times New Roman', Times, serif;
+                            color: var(--gray);
+                        }
+                    }
+
+                    >.definitionss {
+                        >.definitions {
+                            padding-left: 10px;
+                            padding-block: 5px;
+
+                            .text {
+                                // margin-top: 1em;
+
+                                span {
+                                    font-size: 0.9em;
+                                    font-weight: 500;
+                                    color: var(--color);
+                                }
+                            }
+
+                            .synonyms,
+                            .antonyms,
+                            .example {
+                                padding-block: 0.2em;
+                                font-size: 0.9em;
+
+                                >.name>span {
+                                    // font-size: 0.7em;
+                                    font-family: 'Times New Roman', Times, serif;
+                                    font-weight: 500;
+                                    color: var(--gray);
+                                    font-style: italic;
+                                }
+
+                                >.words {
+                                    margin-top: 0.4em;
+                                    font-size: 0.8em;
+                                    color: var(--deep-gray);
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    gap: 0.5em 0.7em;
+
+                                    span {
+                                        padding: 0.5em 1.1em;
+                                        background-color: #88888822;
+                                        border-radius: 100vmax;
+                                        color: var(--deep-gray);
+
+                                    }
+                                }
+                            }
+
+                            .example .ex {
+                                padding: 0.3em 0;
+                                // font-weight: 500;
+                                font-style: italic;
+                                color: var(--deep-gray);
+                            }
+
+                        }
+                    }
+
+                    >.synonyms,
+                    >.antonyms {
+                        padding-block: 0.2em;
+                        font-size: 0.9em;
+
+                        >span.name {
+                            // font-size: 0.7em;
+                            font-family: 'Times New Roman', Times, serif;
+                            font-weight: 500;
+                            color: var(--gray);
+                            font-style: italic;
+                        }
+
+                        >.words {
+                            margin-top: 0.4em;
+                            font-size: 0.8em;
+                            color: var(--deep-gray);
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 0.5em 0.7em;
+
+                            >span {
+                                padding: 0.5em 1.1em;
+                                background-color: #88888822;
+                                border-radius: 100vmax;
+                                color: var(--deep-gray);
+                                font-weight: 500;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        .gap {
+            height: 10px;
+            width: 100%;
+            background-color: var(--gap-color);
+        }
+    }
+
+    #noResult{
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+
+

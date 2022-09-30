@@ -1,0 +1,34 @@
+@forward './font';
+@use './colors' as color;
+@use './scrollbar';
+html{
+    scroll-behavior: smooth;
+}
+*,
+*::after,
+*::before {
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+// Font Awesome Style
+i,
+i::before,
+i::after {
+    font-family: "Font Awesome Kit";
+}
+
+body {
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+::selection {
+    background: color.color('accent');
+    color: color.$bg;
+}

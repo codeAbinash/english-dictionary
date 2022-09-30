@@ -1,0 +1,22 @@
+@use "sass:map";
+@use "sass:math";
+
+
+$accent : #f44236;
+$bg : #f1f1f1;
+$text : #111;
+
+
+$colors : (
+    "accent" : $accent,
+    "bg" : $bg,
+    "text" : $text
+);
+
+@function color($color : "accent", $mix : 100, $opacity : 100, $mix-color : white) {
+    @return mix(rgba(map.get($colors, $color), math.div($opacity , 100)), $mix-color, $mix)
+}
+
+.color{
+    color: $accent;
+}
