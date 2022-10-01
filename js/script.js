@@ -94,7 +94,7 @@ pseudoSearchInput.onclick = () => {
 let lastInputData
 searchInputMain.oninput = debounce((e) => {
 
-    if(e.target.value == '')
+    if (e.target.value == '')
         searchInputMain.focus()
 
     let searchData = lastInputData = e.target.value.trim()
@@ -152,29 +152,88 @@ function showData(data) {
     console.log(data)
     if (data instanceof Array) {
         successResults()
+        let aud_fav_count = 0
         data.forEach(rootWords => {
             currentWord = rootWords.word
             const result = document.createElement('div')
             result.classList.add('result')
-            result.innerHTML = `<div class="word">
-            <h2>${rootWords.word}</h2>
-            <div class="actions">
-                <img src="./image/icon/volume_up_color_48dp.svg">
-                <img src="./image/icon/favorite_border_color_48dp.svg">
-            </div>
-        </div>
-            <div class="phonetics">
-                <p><span>${rootWords.phonetic || 'Phonetics not available'}</span></p>
-            </div>`
-            // result.innerHTML += `<div class='gap'></div>`
+            result.append(makeWordTitle(rootWords.word))
+            result.append(makePhonetics(rootWords.phonetic))
+            // result.append(makeActionButtons(rootWords.word))
+
+            function makeWordTitle(title) {
+                const words = document.createElement('div')
+                words.classList.add('word')
+                words.innerHTML = `<h2>${title}</h2>`
+                words.append(makeActionButtons(title))
+
+                function makeActionButtons(params) {
+                    const actions = document.createElement('div')
+                    actions.classList.add('actions')
+
+                    const voice = document.createElement('img')
+                    voice.src = "./image/icon/volume_up_color_48dp.svg"
+                    voice.classList.add('voice-button')
+
+                    const favorite = document.createElement('img')
+                    favorite.src = "./image/icon/favorite_border_color_48dp.svg"
+                    favorite.classList.add('fav-button')
+
+                    actions.append(voice, favorite)
+                    return actions
+                }
+                return words
+            }
+
+            function makePhonetics(ph) {
+                const phonetic = document.createElement('div')
+                phonetic.classList.add('phonetics')
+                phonetic.innerHTML = `<p><span>${ph || 'Phonetics not available'}</span></p>`
+                return phonetic
+            }
             result.append(makeMeanings(rootWords.meanings))
             results.append(result)
             results.innerHTML += '<div class="gap"></div>'
         })
+        setAudio(data)
+        setClickToFav(data)
     }
     else {
         failResult()
         results.innerHTML = `<h1>No Result Found</h1>`
+    }
+
+    function setClickToFav(wordData) {
+        const favElements = document.querySelectorAll('#results .result .word >.actions img.fav-button')
+        let countFav = 0
+        favElements.forEach(elem => {
+            const word = wordData[countFav].word
+            elem.onclick = () => {
+                // toggle icons
+                addToFav(word)
+            }
+            countFav++
+        })
+    }
+
+    function setAudio(data) {
+        const audioElements = document.querySelectorAll('#results .result .word >.actions img.voice-button')
+        let audioCount = 0
+        audioElements.forEach(elem => {
+            if (data[audioCount].phonetics.length) {
+                const audio = new Audio(getAudioSource(data[audioCount].phonetics))
+                elem.onclick = () => { audio.play() }
+            }
+            audioCount++
+        })
+
+        function getAudioSource(phonetics) {
+            for (let i = 0; i < phonetics.length; i++)
+                if (phonetics[i].audio) {
+                    console.log(phonetics[i].audio)
+                    return phonetics[i].audio
+                }
+        }
     }
 }
 
@@ -305,4 +364,9 @@ function makeMeanings(meanings) {
  */
 function highlightWord(e) {
     return e.replaceAll(currentWord, `<span class='color'>${currentWord}</span>`)
+}
+
+
+function addToFav(w) {
+    console.log(w)
 }
