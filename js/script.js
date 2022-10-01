@@ -93,6 +93,10 @@ pseudoSearchInput.onclick = () => {
 
 let lastInputData
 searchInputMain.oninput = debounce((e) => {
+
+    if(e.target.value == '')
+        searchInputMain.focus()
+
     let searchData = lastInputData = e.target.value.trim()
     if (!searchData)
         return
@@ -114,13 +118,9 @@ searchInputMain.oninput = debounce((e) => {
 }, 200, false)
 
 
-searchInputMain.onsearch = ()=>{
+searchInputMain.onsearch = () => {
     searchInputMain.blur()
 }
-
-
-
-
 
 
 
@@ -135,20 +135,25 @@ searchInputMain.onsearch = ()=>{
 const results = document.getElementById('results')
 const noResults = document.getElementById('noResult')
 
-function successResults(){
+function successResults() {
     results.style.display = 'block'
     noResults.style.display = 'none'
 }
-function failResult(){
+function failResult() {
     results.style.display = 'none'
     noResults.style.display = 'block'
 }
+
+
+let currentWord
+
 function showData(data) {
     results.innerHTML = ''
     console.log(data)
     if (data instanceof Array) {
         successResults()
         data.forEach(rootWords => {
+            currentWord = rootWords.word
             const result = document.createElement('div')
             result.classList.add('result')
             result.innerHTML = `<div class="word">
@@ -240,7 +245,7 @@ function makeMeanings(meanings) {
             function makeDefinition(d) {
                 const dDOM = document.createElement('div')
                 dDOM.classList.add('definitions')
-                dDOM.innerHTML = `<div class="text"><span>${d.definition}</span></div>`
+                dDOM.innerHTML = `<div class="text"><span>&bull; ${d.definition}</span></div>`
                 if (d.example) {
                     dDOM.append(makeExamples(d.example))
                 }
@@ -282,6 +287,7 @@ function makeMeanings(meanings) {
                     const exDOM = document.createElement('div')
                     exDOM.classList.add('example')
                     exDOM.innerHTML = `<div class="name"><span>Example</span></div>`
+                    ex = highlightWord(ex)
                     exDOM.innerHTML += `<div class="ex">${ex}</div>`
                     return exDOM
                 }
@@ -290,4 +296,13 @@ function makeMeanings(meanings) {
 
     }
     return meaningDOM
+}
+
+
+/**
+ * 
+ * @param {String} e 
+ */
+function highlightWord(e) {
+    return e.replaceAll(currentWord, `<span class='color'>${currentWord}</span>`)
 }
