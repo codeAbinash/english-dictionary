@@ -35,8 +35,7 @@
                     justify-content: center;
                     align-items: center;
                     // outline: 1px solid var(--color);
-                    gap: 5px;
-
+                    gap: 3px;
                     img {
                         padding: 7px;
                         aspect-ratio: 1 / 1;
@@ -82,14 +81,17 @@
                     >.definitionss {
                         >.definitions {
                             padding-left: 10px;
-                            padding-block: 5px;
+                            padding-block: 0.5em;
 
                             .text {
                                 // margin-top: 1em;
-
+                                display: list-item;
+                                margin-left: 0.5em;
                                 span {
                                     font-size: 0.9em;
-                                    font-weight: 500;
+                                    font-weight: 405;
+                                    color: var(--deep-gray);
+                                    // list-style-type: square;
                                     // color: var(--color);
                                 }
                             }

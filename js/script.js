@@ -115,7 +115,7 @@ searchInputMain.oninput = debounce((e) => {
             showData(data)
             controller.abort()
         })
-}, 200, false)
+}, 350, false)
 
 
 searchInputMain.onsearch = () => {
@@ -191,7 +191,7 @@ function showData(data) {
                 phonetic.innerHTML = `<p><span>${ph || 'Phonetics not available'}</span></p>`
                 return phonetic
             }
-            result.append(makeMeanings(rootWords.meanings))
+            result.append(makeMeanings(rootWords))
             results.append(result)
             results.innerHTML += '<div class="gap"></div>'
         })
@@ -229,10 +229,9 @@ function showData(data) {
 
         function getAudioSource(phonetics) {
             for (let i = 0; i < phonetics.length; i++)
-                if (phonetics[i].audio) {
-                    console.log(phonetics[i].audio)
+                if (phonetics[i].audio)
                     return phonetics[i].audio
-                }
+            // console.log(phonetics[i].audio)
         }
     }
 }
@@ -241,17 +240,19 @@ function showData(data) {
  * 
  * @param {Array} meanings 
  */
-function makeMeanings(meanings) {
+function makeMeanings(word) {
+    let meanings = word.meanings
     const meaningDOM = document.createElement('div')
     meaningDOM.classList.add('meanings')
     meanings.forEach(meaning => {
         meaningDOM.innerHTML += `<div class='gap'></div>`
         meaningDOM.append(makeMeaning(meaning))
     })
+
     function makeMeaning(meaning) {
         const meaningDOM = document.createElement('div')
         meaningDOM.classList.add('meaning')
-        meaningDOM.innerHTML = ` <div class="type"><span>${meaning.partOfSpeech}</span></div>`
+        meaningDOM.innerHTML = ` <div class="type"><span class="color">${word.word} : </span> <span>${meaning.partOfSpeech}</span></div>`
         meaningDOM.append(makeDefinitions(meaning.definitions))
         if (meaning.synonyms.length)
             meaningDOM.append(makeSynonyms(meaning.synonyms))
@@ -304,7 +305,7 @@ function makeMeanings(meanings) {
             function makeDefinition(d) {
                 const dDOM = document.createElement('div')
                 dDOM.classList.add('definitions')
-                dDOM.innerHTML = `<div class="text"><span>&bull; ${d.definition}</span></div>`
+                dDOM.innerHTML = `<div class="text"><span>${d.definition}</span></div>`
                 if (d.example) {
                     dDOM.append(makeExamples(d.example))
                 }
