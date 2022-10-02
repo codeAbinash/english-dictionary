@@ -11,14 +11,12 @@
     width: 100%;
     $navbar-height : 65px;
     .screen-container {
+        height: calc(100vh - $navbar-height + 2px);
+        overflow-x: hidden;
         // height: 100vh;
         .screen{
-            // height: calc(100vh - $navbar-height + 2px);
-            // overflow: hidden;
             width: 100%;
-            // padding-bottom: $navbar-height;
             display: none;
-            // padding: 20px;
             &.active{
                 display: block;
             }
