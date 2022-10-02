@@ -152,7 +152,6 @@ function showData(data) {
     console.log(data)
     if (data instanceof Array) {
         successResults()
-        let aud_fav_count = 0
         data.forEach(rootWords => {
             currentWord = rootWords.word
             const result = document.createElement('div')
@@ -188,8 +187,14 @@ function showData(data) {
             function makePhonetics(ph) {
                 const phonetic = document.createElement('div')
                 phonetic.classList.add('phonetics')
-                phonetic.innerHTML = `<p><span>${ph || 'Phonetics not available'}</span></p>`
+                phonetic.innerHTML = `<p><span>${ph || getPhoneticsText() || 'Phonetics is not available'}</span></p>`
                 return phonetic
+                function getPhoneticsText() {
+                    let phonetics = rootWords.phonetics
+                    for (let i = 0; i < phonetics.length; i++)
+                        if (phonetics[i].text)
+                            return phonetics[i].text
+                }
             }
             result.append(makeMeanings(rootWords))
             results.append(result)
@@ -269,7 +274,7 @@ function makeMeanings(word) {
             const words = document.createElement('div')
             words.classList.add('words')
             ant.forEach(a => {
-                words.innerHTML += `<span>${a}</span>`
+                words.innerHTML += `<span class='press'>${a}</span>`
             })
             antDOM.append(words)
             return antDOM
@@ -282,7 +287,7 @@ function makeMeanings(word) {
             const words = document.createElement('div')
             words.classList.add('words')
             syn.forEach(a => {
-                words.innerHTML += `<span>${a}</span>`
+                words.innerHTML += `<span class='press'>${a}</span>`
             })
             antDOM.append(words)
             return antDOM
@@ -324,7 +329,7 @@ function makeMeanings(word) {
                     const words = document.createElement('div')
                     words.classList.add('words')
                     syn.forEach(s => {
-                        words.innerHTML += `<span>${s}</span>`
+                        words.innerHTML += `<span class='press'>${s}</span>`
                     })
                     synDOM.append(words)
                     return synDOM
@@ -336,7 +341,7 @@ function makeMeanings(word) {
                     const words = document.createElement('div')
                     words.classList.add('words')
                     ant.forEach(s => {
-                        words.innerHTML += `<span>${s}</span>`
+                        words.innerHTML += `<span class='press'>${s}</span>`
                     })
                     antDOM.append(words)
                     return antDOM
@@ -361,7 +366,7 @@ function makeMeanings(word) {
 
 function highlightWord(e) {
     let w = `(${currentWord})`
-    return e.replace(new RegExp(w,'gi'), `<span class='color'>$1</span>`)
+    return e.replace(new RegExp(w, 'gi'), `<span class='color'>$1</span>`)
 }
 
 

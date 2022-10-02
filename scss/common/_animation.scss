@@ -7,3 +7,7 @@
         scale: math.div($scale, 100);
     }
 }
+
+.press{
+    @include press(200,95);
+}

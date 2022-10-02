@@ -116,13 +116,14 @@
                                     color: var(--deep-gray);
                                     display: flex;
                                     flex-wrap: wrap;
-                                    gap: 0.5em 0.7em;
+                                    gap: 0.5em;
 
                                     span {
                                         padding: 0.5em 1.1em;
                                         background-color: #88888822;
                                         border-radius: 100vmax;
                                         color: var(--deep-gray);
+                                        font-weight: 500;
 
                                     }
                                 }
@@ -157,7 +158,7 @@
                             color: var(--deep-gray);
                             display: flex;
                             flex-wrap: wrap;
-                            gap: 0.5em 0.7em;
+                            gap: 0.5em;
 
                             >span {
                                 padding: 0.5em 1.1em;

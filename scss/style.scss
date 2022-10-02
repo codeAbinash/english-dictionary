@@ -6,20 +6,17 @@
 @use './screen2';
 @use './screen1';
 
-body {
-    min-height: 100vh;
-}
 
 #main {
-    min-height: 100vh;
     width: 100%;
     $navbar-height : 65px;
     .screen-container {
+        // height: 100vh;
         .screen{
             // height: calc(100vh - $navbar-height + 2px);
             // overflow: hidden;
             width: 100%;
-            padding-bottom: $navbar-height;
+            // padding-bottom: $navbar-height;
             display: none;
             // padding: 20px;
             &.active{
@@ -35,6 +32,7 @@ body {
         height: $navbar-height;
         padding-block: 3px;
         display: flex;
+        z-index: 100;
         // display: none;
         justify-content: space-around;
         align-items: center;
@@ -44,7 +42,7 @@ body {
         --webkit-backdrop-filter: blur(var(--blur));
 
         >.option {
-            height: 100%;
+            // height: 100%;
             // background-color: lime;
             padding-inline: 5%;
             display: flex;
