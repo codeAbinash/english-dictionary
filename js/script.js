@@ -363,10 +363,16 @@ function makeMeanings(word) {
     return meaningDOM
 }
 
-
 function highlightWord(e) {
-    let w = `(${currentWord})`
-    return e.replace(new RegExp(w, 'gi'), `<span class='color'>$1</span>`)
+    let w =
+        `([^a-z]${currentWord}[^a-z])|(^${currentWord}[^a-z])|([^a-z]${currentWord}$)`
+    return e.replace(new RegExp(w, 'gi'), replacer)
+    function replacer(match) {
+        return match.replace(
+            new RegExp(`(${currentWord})`, 'gi'),
+            `<span class='color'>$1</span>`
+        )
+    }
 }
 
 
