@@ -359,12 +359,9 @@ function makeMeanings(word) {
 }
 
 
-/**
- * 
- * @param {String} e 
- */
 function highlightWord(e) {
-    return e.replaceAll(currentWord, `<span class='color'>${currentWord}</span>`)
+    let w = `(${currentWord})`
+    return e.replace(new RegExp(w,'gi'), `<span class='color'>$1</span>`)
 }
 
 
