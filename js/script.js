@@ -113,6 +113,8 @@ searchInputMain.oninput = debounce((e) => {
     })
         .then(data => {
             showData(data)
+            // const elem_touch_hold_option = document.querySelectorAll('img')
+            // elem_touch_hold_option.forEach(elem => elem.addEventListener('contextmenu', absorbEvent_))
             controller.abort()
         })
 }, 350, false)
@@ -379,3 +381,34 @@ function highlightWord(e) {
 function addToFav(w) {
     console.log(w)
 }
+
+
+
+
+
+
+
+
+
+// Disable press and hold options
+// /** @param {Event} e */
+function absorbEvent_(event) {
+    var e = event || window.event;
+    e.preventDefault && e.preventDefault();
+    e.stopPropagation && e.stopPropagation();
+    e.cancelBubble = true;
+    e.returnValue = false;
+    return false;
+}
+
+// function preventLongPressMenu(node) {
+//     node.ontouchstart = absorbEvent_;
+//     node.ontouchmove = absorbEvent_;
+//     node.ontouchend = absorbEvent_;
+//     node.ontouchcancel = absorbEvent_;
+// }
+
+// const elem_touch_hold_option = document.querySelectorAll('img')
+// elem_touch_hold_option.forEach(elem => elem.addEventListener('contextmenu', absorbEvent_))
+
+document.body.addEventListener('contextmenu', absorbEvent_)

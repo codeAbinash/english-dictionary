@@ -34,6 +34,7 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    user-select: none;
                     // outline: 1px solid var(--color);
                     gap: 3px;
                     img {
