@@ -2,16 +2,17 @@
 @use './common/layout' as ui;
 @use './common/animation' as anim;
 @use './common/colors' as color;
-@use './common/var';
+@use './common/var' as var;
 @use './screen2';
 @use './screen1';
 
 
 #main {
     width: 100%;
-    $navbar-height : 65px;
     .screen-container {
-        height: calc(100vh - $navbar-height + 2px);
+        max-width: 600px;
+        margin-inline: auto;
+        height: var.$screenMinHeight;
         overflow-x: hidden;
         // height: 100vh;
         .screen{
@@ -27,7 +28,7 @@
         width: 100%;
         position: fixed;
         bottom: 0;
-        height: $navbar-height;
+        height: var.$navbar-height;
         padding-block: 3px;
         display: flex;
         z-index: 100;

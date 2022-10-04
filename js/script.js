@@ -16,8 +16,6 @@ async function registerSW() {
     } else
         console.log('Service worker is not available for this device')
 }
-
-
 // registerSW()
 
 
@@ -28,7 +26,16 @@ const options = document.querySelectorAll('#main .bottom .option')
 const screens = document.querySelectorAll('#main .screen-container .screen')
 const searchInputMain = document.getElementById('input-search-word')
 const pseudoSearchInput = document.getElementById('pseudoSearchInput')
+/// Screens
 
+function getId(id) { return document.getElementById(id) }
+
+const searchScreens = {
+    results: getId('search-results'),
+    noResults: getId('search-noResult'),
+    loadingScreen: getId('search-loadingScreen'),
+    searchStartScreen: getId('search-startScreen'),
+}
 
 const screenCallback = [
     () => {
@@ -92,68 +99,79 @@ pseudoSearchInput.onclick = () => {
 
 
 let lastInputData
-searchInputMain.oninput = debounce((e) => {
+searchInputMain.oninput = debounce(e => searchWord(e), 350, false)
 
-    if (e.target.value == '')
-        searchInputMain.focus()
+searchInputMain.onsearch = () => { searchInputMain.blur() }
 
-    let searchData = lastInputData = e.target.value.trim()
-    if (!searchData)
-        return
+function searchWord(e) {
+    showScreen('loading')
 
-    // Everything is ok 
-    let controller = new AbortController()
-    let signal = controller.signal
-    const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${searchData}`
+    if (e.target.value) {
+        let searchData = lastInputData = e.target.value.trim()
+        if (!searchData)
+            return
 
-    fetch(url, { signal }).then(res => {
-        if (lastInputData !== searchData)
-            controller.abort()
-        return res.json()
-    })
-        .then(data => {
-            showData(data)
-            // const elem_touch_hold_option = document.querySelectorAll('img')
-            // elem_touch_hold_option.forEach(elem => elem.addEventListener('contextmenu', absorbEvent_))
-            controller.abort()
+        // Everything is ok 
+        let controller = new AbortController()
+        let signal = controller.signal
+        const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${searchData}`
+
+        fetch(url, { signal }).then(res => {
+            if (lastInputData !== searchData)
+                controller.abort()
+            return res.json()
         })
-}, 350, false)
+            .then(data => {
+                console.log("Loaded")
+                showData(data)
+                // const elem_touch_hold_option = document.querySelectorAll('img')
+                // elem_touch_hold_option.forEach(elem => elem.addEventListener('contextmenu', absorbEvent_))
+                controller.abort()
+            })
+    } else {
+        searchInputMain.focus()
+        showScreen('start-screen')
+    }
+    // if (e.target.value == '')
+}
 
 
-searchInputMain.onsearch = () => {
-    searchInputMain.blur()
+
+let lastSearchScreen = searchScreens.searchStartScreen
+function showScreen(screen) {
+    lastSearchScreen.style.display = 'none'
+    switch (screen) {
+        case 'start-screen':
+            searchScreens.searchStartScreen.style.display = 'block'
+            lastSearchScreen = searchScreens.searchStartScreen
+            break
+        case 'not-found':
+            searchScreens.noResults.style.display = 'block'
+            lastSearchScreen = searchScreens.noResults
+            break
+        case 'loading':
+            searchScreens.loadingScreen.style.display = 'block'
+            lastSearchScreen = searchScreens.loadingScreen
+            break
+        case 'results':
+            searchScreens.results.style.display = 'block'
+            lastSearchScreen = searchScreens.results
+            break
+    }
 }
 
 
 
 
-
-
-
-
-
-
-/// 
-const results = document.getElementById('results')
-const noResults = document.getElementById('noResult')
-
-function successResults() {
-    results.style.display = 'block'
-    noResults.style.display = 'none'
-}
-function failResult() {
-    results.style.display = 'none'
-    noResults.style.display = 'block'
-}
 
 
 let currentWord
 
 function showData(data) {
-    results.innerHTML = ''
+    searchScreens.results.innerHTML = ''
     console.log(data)
     if (data instanceof Array) {
-        successResults()
+        showScreen('results')
         data.forEach(rootWords => {
             currentWord = rootWords.word
             const result = document.createElement('div')
@@ -168,7 +186,7 @@ function showData(data) {
                 words.innerHTML = `<h2>${title}</h2>`
                 words.append(makeActionButtons(title))
 
-                function makeActionButtons(params) {
+                function makeActionButtons() {
                     const actions = document.createElement('div')
                     actions.classList.add('actions')
 
@@ -199,15 +217,15 @@ function showData(data) {
                 }
             }
             result.append(makeMeanings(rootWords))
-            results.append(result)
-            results.innerHTML += '<div class="gap"></div>'
+            searchScreens.results.append(result)
+            searchScreens.results.innerHTML += '<div class="gap"></div>'
         })
         setAudio(data)
         setClickToFav(data)
     }
     else {
-        failResult()
-        results.innerHTML = `<h1>No Result Found</h1>`
+        showScreen('not-found')
+        searchScreens.results.innerHTML = `<h1>No Result Found</h1>`
     }
 
     function setClickToFav(wordData) {
@@ -391,7 +409,7 @@ function addToFav(w) {
 
 
 // Disable press and hold options
-// /** @param {Event} e */
+
 function absorbEvent_(event) {
     var e = event || window.event;
     e.preventDefault && e.preventDefault();
@@ -400,15 +418,4 @@ function absorbEvent_(event) {
     e.returnValue = false;
     return false;
 }
-
-// function preventLongPressMenu(node) {
-//     node.ontouchstart = absorbEvent_;
-//     node.ontouchmove = absorbEvent_;
-//     node.ontouchend = absorbEvent_;
-//     node.ontouchcancel = absorbEvent_;
-// }
-
-// const elem_touch_hold_option = document.querySelectorAll('img')
-// elem_touch_hold_option.forEach(elem => elem.addEventListener('contextmenu', absorbEvent_))
-
 document.body.addEventListener('contextmenu', absorbEvent_)

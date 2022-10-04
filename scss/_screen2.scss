@@ -2,6 +2,7 @@
 
 
 #screen2 {
+
     // padding-bottom: 100vh;
     // $navbar-height : 65px;
     // padding-bottom: $navbar-height;
@@ -11,10 +12,13 @@
         padding-top: 20px;
         // padding-bottom: 20px;
     }
-    .hidden{
+
+    .hidden {
         display: none;
     }
-    >#results {
+
+    >#search-results {
+
         // padding: 20px;
         .result {
             .word {
@@ -37,6 +41,7 @@
                     user-select: none;
                     // outline: 1px solid var(--color);
                     gap: 3px;
+
                     img {
                         padding: 7px;
                         aspect-ratio: 1 / 1;
@@ -88,6 +93,7 @@
                                 // margin-top: 1em;
                                 display: list-item;
                                 margin-left: 0.5em;
+
                                 span {
                                     font-size: 0.9em;
                                     font-weight: 405;
@@ -174,6 +180,7 @@
             }
 
         }
+
         .gap {
             height: 10px;
             width: 100%;
@@ -181,13 +188,103 @@
         }
     }
 
-    #noResult{
+    #search-noResult {
+        .container {
+
+            padding: 7%;
+            display: flex;
+            min-height: calc(100vh - 200px);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            >img.illustration {
+                width: 65%;
+            }
+
+            >h1 {
+                color: var(--color);
+                text-align: center;
+            }
+
+            >p {
+                text-align: center;
+                font-weight: 500;
+                font-size: 0.8em;
+                color: var(--text);
+            }
+        }
+    }
+
+    #search-loadingScreen {
         padding: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+
+        .bg {
+            background-image: linear-gradient(100deg,
+                    #77777715 0%, #77777715 40%,
+                    #77777725 50%, #77777725 55%,
+                    #77777715 65%, #77777715 100%);
+            background-size: 200% 100%;
+            background-position-x: 180%;
+            animation: loadSkeleton 1.3s infinite;
+        }
+
+        @keyframes loadSkeleton {
+            to {
+                background-position-x: -20%;
+            }
+        }
+
+        .h1 {
+            height: 4rem;
+            border-radius: 10px;
+        }
+
+        .h2 {
+            height: 2.5rem;
+            border-radius: 10px;
+        }
+
+        .p {
+            height: 1rem;
+            border-radius: 100vmax;
+            margin-block: 0.6rem;
+        }
+
+        .code {
+            width: 100%;
+            height: 11rem;
+            border-radius: 10px;
+            margin-block: 1rem;
+        }
+
+        .note {
+            width: 100%;
+            height: 7rem;
+            border-radius: 10px;
+            margin-block: 1rem;
+        }
+
+        .w100 {
+            width: 100%;
+        }
+
+        .w70 {
+            width: 80%;
+        }
+
+        .blank {
+            width: 100%;
+            height: 1rem;
+        }
+
+        .blanks {
+            width: 100%;
+            height: 0.65rem;
+        }
+    }
+
+    #search-startScreen {
+        padding: 20px;
     }
 }
-
-
-

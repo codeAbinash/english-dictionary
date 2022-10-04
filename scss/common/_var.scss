@@ -1,5 +1,6 @@
 :root {
     --color:#f44236;
+    --text:#333;
     --bg-blur: #ffffffee;
     --blur: 10px;
     --bdrs: 10px;
@@ -9,3 +10,6 @@
     --gray2:#555;
     --deep-gray: #444;
 }
+
+$navbar-height : 65px;
+$screenMinHeight : calc(100vh - $navbar-height + 2px);

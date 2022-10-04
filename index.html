@@ -29,7 +29,7 @@
                     <input type="search" class="searchBar" placeholder="Search any word" autocomplete="false"
                         spellcheck="true" id="input-search-word">
                 </div>
-                <div id="results">
+                <div id="search-results" style="display: none;">
                     <!-- <div class="result">
                             <div class="word">
                                 <h2>Happiness</h2>
@@ -158,10 +158,59 @@
 
                 </div>
 
-                <div id="noResult" style="display: none;">
-                    <h1>No Result Found</h1>
+                <div id="search-noResult" style="display: none;">
+                    <div class="container">
+                        <img src="./image/illustrations/sad boy.png" class="illustration" loading="lazy">
+                        <h1>Word Not Found 😢!</h1>
+                        <p>The word you are searching for is not found 😢!</p>
+                    </div>
                 </div>
 
+                <div id="search-loadingScreen" style="display: none;">
+                    <div class="bg h1 w100"></div>
+                    <div class="blank"></div>
+                    <div class="blank"></div>
+                    <div class="h2 bg w70"></div>
+                    <div class="blanks"></div>
+                    <div class="p bg w100"></div>
+                    <div class="p bg w100"></div>
+                    <div class="p bg w70"></div>
+                    <div class="blank"></div>
+                    <div class="blanks"></div>
+                    <div class="h2 bg w70"></div>
+                    <div class="blanks"></div>
+                    <div class="p bg w100"></div>
+                    <div class="p bg w100"></div>
+                    <div class="p bg w100"></div>
+                    <div class="p bg w70"></div>
+                    
+                    <div class="blanks"></div>
+                    <div class="blanks"></div>
+                    <div class="h2 bg w70"></div>
+                    <div class="p bg w100"></div>
+                    <div class="p bg w100"></div>
+                    <div class="p bg w70"></div>
+                    
+                    <div class="blanks"></div>
+                    <div class="blanks"></div>
+                    <div class="h2 bg w70"></div>
+                    <div class="p bg w100"></div>
+                    <div class="p bg w100"></div>
+                    <div class="p bg w70"></div>
+                    
+                    <div class="blanks"></div>
+                    <div class="blanks"></div>
+                    <div class="h2 bg w70"></div>
+                    <div class="p bg w100"></div>
+                    <div class="p bg w100"></div>
+                    <div class="p bg w70"></div>
+                    <div class="blank"></div>
+                    <div class="blank"></div>
+                </div>
+
+                <div id="search-startScreen">
+                    <h1>Try Typing Hello</h1>
+                </div>
             </div>
             <div class="screen">
                 <h1>Screen 3</h1>
