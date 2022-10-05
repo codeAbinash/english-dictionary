@@ -229,7 +229,7 @@ function showData(data) {
     }
 
     function setClickToFav(wordData) {
-        const favElements = document.querySelectorAll('#search-results .result .word >.actions img.fav-button')
+        const favElements = document.querySelectorAll('#results .result .word >.actions img.fav-button')
         let countFav = 0
         favElements.forEach(elem => {
             const word = wordData[countFav].word
@@ -242,13 +242,12 @@ function showData(data) {
     }
 
     function setAudio(data) {
-        const audioElements = document.querySelectorAll('#search-results .result .word >.actions img.voice-button')
-        console.log(audioElements)
+        const audioElements = document.querySelectorAll('#results .result .word >.actions img.voice-button')
         let audioCount = 0
         audioElements.forEach(elem => {
             if (data[audioCount].phonetics.length) {
                 const audio = new Audio(getAudioSource(data[audioCount].phonetics))
-                elem.onclick = () => { audio.play(); console.log('Hello Abinash') }
+                elem.onclick = () => { audio.play()}
             }
             audioCount++
         })
