@@ -1,6 +1,8 @@
 // import { } from './lib/fontawesome.js'
 import debounce from './lib/debounce.js'
+import animations from './animations.js'
 
+animations()
 
 // Register a Service Worker
 
@@ -122,7 +124,6 @@ function searchWord(e) {
             return res.json()
         })
             .then(data => {
-                console.log("Loaded")
                 showData(data)
                 // const elem_touch_hold_option = document.querySelectorAll('img')
                 // elem_touch_hold_option.forEach(elem => elem.addEventListener('contextmenu', absorbEvent_))

@@ -29,7 +29,7 @@
         position: fixed;
         bottom: 0;
         height: var.$navbar-height;
-        padding-block: 3px;
+        // padding-block: 3px;
         display: flex;
         z-index: 100;
         // display: none;
@@ -43,6 +43,10 @@
         >.option {
             // height: 100%;
             // background-color: lime;
+            width: 25%;
+            height: 100%;
+            overflow: hidden;
+            // border: 1px solid red;
             padding-inline: 5%;
             display: flex;
             justify-content: center;
