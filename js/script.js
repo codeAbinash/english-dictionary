@@ -402,13 +402,6 @@ function addToFav(w) {
 }
 
 
-
-
-
-
-
-
-
 // Disable press and hold options
 
 function absorbEvent_(event) {
