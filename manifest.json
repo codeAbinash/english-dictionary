@@ -1,27 +1,33 @@
 {
-    "short_name": "WFT",
-    "name": "Web Folder Structure",
+    "short_name": "English Dictionary",
+    "name": "English Dictionary",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#fff",
-    "description": "Web folder structure",
+    "description": "A simple and easy to use english dictionary",
     "theme_color": "#fff",
     "icons": [
         {
-            "src": "./image/icon/favicon.ico",
+            "src": "./image/icon/app_icon/icon192.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "any"
         },
         {
-            "src": "./image/icon/favicon.ico",
+            "src": "./image/icon/app_icon/icon512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "./image/icon/favicon.ico",
+            "src": "./image/icon/app_icon/icon196.png",
             "sizes": "196x196",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "./image/icon/favicon.ico",
+            "sizes": "16x16 32x32 48x48 64x64 128x128 256x256",
             "type": "image/png",
             "purpose": "any"
         }
@@ -29,25 +35,21 @@
     "screenshots": [
         {
             "src": "./image/icon/favicon.ico",
-
             "type": "image/png",
             "sizes": "358x730"
         },
         {
             "src": "./image/icon/favicon.ico",
-
             "type": "image/jpg",
             "sizes": "358x730"
         },
         {
             "src": "./image/icon/favicon.ico",
-
             "type": "image/jpg",
             "sizes": "358x730"
         },
         {
             "src": "./image/icon/favicon.ico",
-
             "type": "image/jpg",
             "sizes": "358x730"
         }
@@ -61,7 +63,6 @@
             "icons": [
                 {
                     "src": "./image/icon/favicon.ico",
-
                     "sizes": "96x96"
                 }
             ]
@@ -74,7 +75,6 @@
             "icons": [
                 {
                     "src": "./image/icon/favicon.ico",
-
                     "sizes": "96x96"
                 }
             ]
@@ -87,7 +87,6 @@
             "icons": [
                 {
                     "src": "./image/icon/favicon.ico",
-
                     "sizes": "96x96"
                 }
             ]
